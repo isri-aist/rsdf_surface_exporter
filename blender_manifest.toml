@@ -8,7 +8,7 @@ maintainer = "Thomas Duvinage"
 
 type = "add-on"
 
-website = "https://github.com/yourname/rsdf-surface-exporter"
+website = "https://github.com/isri-aist/rsdf_surface_exporter"
 
 tags = [
   "Import-Export",
