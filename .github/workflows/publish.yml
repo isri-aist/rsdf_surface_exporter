@@ -32,6 +32,7 @@ jobs:
             data/ \
             geometry/ \
             operators/ \
+            rsdf_io/ \
             ui/ \
             utils/
           echo "ZIP_NAME=$ZIP_NAME" >> $GITHUB_ENV
