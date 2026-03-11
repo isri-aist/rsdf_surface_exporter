@@ -1,0 +1,44 @@
+schema_version = "1.0.0"
+
+id = "rsdf_surface_exporter"
+version = "1.0.0"
+name = "RSDF Surface Exporter"
+tagline = "Define planar surfaces from mesh faces and export RSDF files"
+maintainer = "Thomas Duvinage"
+
+type = "add-on"
+
+website = "https://github.com/yourname/rsdf-surface-exporter"
+
+tags = [
+  "Import-Export",
+  "Mesh",
+  "Object",
+]
+
+blender_version_min = "4.2.0"
+
+license = [
+  "SPDX:BSD-3-Clause"
+]
+
+copyright = [
+  "2026 Thomas Duvinage",
+]
+
+platforms = [
+  "windows-x64",
+  "macos-arm64",
+  "linux-x64",
+]
+
+[permissions]
+files = "Export RSDF surface description files to disk"
+
+[build]
+paths_exclude_pattern = [
+  "__pycache__/",
+  "/.git/",
+  "/*.zip",
+  "*.pyc",
+]
