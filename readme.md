@@ -1,7 +1,7 @@
 # RSDF Surface Tool
 
 [![Blender Version](https://img.shields.io/badge/Blender-5.0.1-blue)](#)
-[![Release](https://img.shields.io/github/v/release/isri-aist/rsdf_surface_exporter?style=for-the-badge)](https://github.com/isri-aist/rsdf_surface_exporter/releases)
+[![Latest Release](https://img.shields.io/github/v/release/isri-aist/rsdf_surface_exporter)](https://github.com/isri-aist/rsdf_surface_exporter/releases/latest)
 
 A Blender addon to create, visualize, and export **RSDF (Robot Surface Description Format)** surfaces from 3D models. Supports **planar and cylindrical surfaces** with full visualization in Blender.
 
