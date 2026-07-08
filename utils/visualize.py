@@ -23,7 +23,8 @@ def get_green_material():
 
         # Transparency
         mat.blend_method = "BLEND"
-        mat.shadow_method = "NONE"
+        if hasattr(mat, "shadow_method"):
+            mat.shadow_method = "NONE"  # removed in Blender 4.2+ (EEVEE Next)
 
     return mat
 
@@ -75,9 +76,6 @@ def create_surface_mesh(surf, name_prefix="RSDF_Surface"):
         obj.rotation_euler.rotate_axis("Y", surf.rpy_p)
         obj.rotation_euler.rotate_axis("Z", surf.rpy_y)
 
-        # 4. Move cylinder to origin
-        obj.location = (surf.origin_x, surf.origin_y, surf.origin_z)
-
     else:
         return None
 
@@ -85,7 +83,8 @@ def create_surface_mesh(surf, name_prefix="RSDF_Surface"):
     # Apply transform
     # -----------------------------
     obj.location = (surf.origin_x, surf.origin_y, surf.origin_z)
-    obj.rotation_euler = (surf.rpy_r, surf.rpy_p, surf.rpy_y)
+    if surf.surface_type == "PLANE":
+        obj.rotation_euler = (surf.rpy_r, surf.rpy_p, surf.rpy_y)
 
     # -----------------------------
     # Apply green material

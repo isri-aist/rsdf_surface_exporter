@@ -97,4 +97,3 @@ blender --command extension build
 ## To be improved
 
 * Parent link is set to base_link by default. A way to set it automatically after loading urdf would be better
-* Cylindrical loading is not working properly.

@@ -1,13 +1,17 @@
 import bpy
+from bpy_extras.io_utils import ExportHelper
 
 from ..rsdf_io.rsdf_writer import export_rsdf
 
 
-class RSDF_OT_export_rsdf(bpy.types.Operator):
+class RSDF_OT_export_rsdf(bpy.types.Operator, ExportHelper):
     bl_idname = "rsdf.export"
     bl_label = "Export RSDF"
 
-    filepath: bpy.props.StringProperty(subtype="FILE_PATH")
+    filename_ext = ".rsdf"
+    filter_glob: bpy.props.StringProperty(
+        default="*.rsdf", options={"HIDDEN"}, maxlen=255
+    )
 
     def execute(self, context):
         surfaces = context.scene.rsdf_surfaces
@@ -15,8 +19,3 @@ class RSDF_OT_export_rsdf(bpy.types.Operator):
         export_rsdf(self.filepath, surfaces)
 
         return {"FINISHED"}
-
-    def invoke(self, context, event):
-        context.window_manager.fileselect_add(self)
-
-        return {"RUNNING_MODAL"}
