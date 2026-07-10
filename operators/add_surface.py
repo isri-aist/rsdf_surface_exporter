@@ -5,6 +5,7 @@ from ..geometry.plane_fit import compute_plane
 from ..geometry.projection import project_to_plane
 from ..utils.mesh_utils import get_selected_face_vertices
 from ..utils.rotation_utils import axis_to_rpy
+from ..utils.visualize import create_surface_mesh
 
 
 class RSDF_OT_add_surface(bpy.types.Operator):
@@ -23,6 +24,8 @@ class RSDF_OT_add_surface(bpy.types.Operator):
         if len(verts) < 3:
             self.report({"ERROR"}, "Need at least 3 vertices")
             return {"CANCELLED"}
+
+        source_obj = context.edit_object
 
         surf = context.scene.rsdf_surfaces.add()
         surf.name = f"Surface_{len(context.scene.rsdf_surfaces)}"
@@ -66,6 +69,14 @@ class RSDF_OT_add_surface(bpy.types.Operator):
 
             surf.radius = radius
             surf.width = width
+
+        # primitive_cylinder_add requires Object mode, otherwise it injects
+        # geometry into the mesh currently being edited instead of creating
+        # a new object.
+        bpy.ops.object.mode_set(mode="OBJECT")
+        create_surface_mesh(surf)
+        context.view_layer.objects.active = source_obj
+        bpy.ops.object.mode_set(mode="EDIT")
 
         context.scene.rsdf_surface_index = len(context.scene.rsdf_surfaces) - 1
 

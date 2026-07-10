@@ -2,6 +2,8 @@ import ast
 
 import bpy
 
+SURFACE_VIS_PREFIX = "RSDF_Surface"
+
 
 def get_green_material():
     """
@@ -29,7 +31,7 @@ def get_green_material():
     return mat
 
 
-def create_surface_mesh(surf, name_prefix="RSDF_Surface"):
+def create_surface_mesh(surf, name_prefix=SURFACE_VIS_PREFIX):
     """
     Create a mesh in the scene to visualize the RSDF surface.
     Supports planar and cylindrical surfaces.
