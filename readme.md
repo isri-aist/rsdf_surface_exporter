@@ -62,6 +62,64 @@ A Blender addon to create, visualize, and export **RSDF (Robot Surface Descripti
 2. Select an RSDF XML file.
 3. All surfaces are imported with correct position, orientation, and type.
 
+### 5. Export ROS2 Description Package
+
+1. Click **Export ROS2 Description Package** in the sidebar.
+2. Set the package name, robot name, maintainer info, and whether to include RSDF surfaces.
+3. Choose a destination folder. A full `ament_cmake` package is generated there:
+
+```
+<package_name>/
+  package.xml
+  CMakeLists.txt
+  urdf/<robot_name>.urdf
+  meshes/<link_name>.stl
+  rsdf/<robot_name>.rsdf        (if "Include RSDF Surfaces" is enabled)
+  launch/display.launch.py
+  launch/display.rviz
+```
+
+- Every top-level mesh/empty object in the scene becomes a URDF link named
+  after the object; parent/child relationships become URDF joints.
+- By default, a joint is **fixed**. To make it movable, add custom
+  properties to the child object:
+  1. Select the child object in the 3D viewport.
+  2. In the **Properties editor**, open the **Object Properties** tab (the
+     small orange square icon — not the green triangle "Object Data" tab).
+  3. Scroll all the way to the **bottom** of that tab. There's a
+     **"Custom Properties"** section, collapsed by default — click its
+     triangle/arrow to expand it.
+  4. Click **+ Add** (or **New**) once per property, rename it to the exact
+     name below, and set its value. Every joint needs a `joint` property
+     naming its type, plus the properties required for that type:
+
+     | `joint` value | Meaning | Required properties | Optional properties |
+     |---|---|---|---|
+     | `revolute` | Bounded rotation around `axis` | `axis`, `lower`, `upper` | `effort`, `velocity`, `name` |
+     | `continuous` | Unbounded rotation around `axis` (e.g. a wheel) | `axis` | `effort`, `velocity`, `name` |
+     | `prismatic` | Sliding motion along `axis` | `axis`, `lower`, `upper` | `effort`, `velocity`, `name` |
+
+     Property reference:
+     - `axis`: string `"x y z"`, e.g. `"0 0 1"` to rotate/slide around Z.
+     - `lower`, `upper`: floats — joint limits in radians (revolute) or
+       metres (prismatic).
+     - `effort`: float, default `1000` — max effort (N or N·m) reported in
+       the URDF `<limit>` tag.
+     - `velocity`: float, default `1.0` — max velocity (rad/s or m/s)
+       reported in the URDF `<limit>` tag.
+     - `name`: string, optional — overrides the joint's name in the URDF
+       (defaults to `<link_name>_joint`).
+
+     If `joint` is omitted entirely, the object gets a **fixed** joint and
+     none of the above are needed. If `joint` is set but a required
+     property for that type is missing, the export falls back to a fixed
+     joint and reports a warning listing the missing property.
+- Mesh geometry is exported as STL, in each object's own local space, so it
+  lines up with the joint origins computed from `matrix_local`.
+- Each RSDF surface now has a **Link** field (default `base_link`); set it
+  to the name of the link the surface should be attached to before
+  exporting a multi-link scene.
+
 ---
 
 ## RSDF Format

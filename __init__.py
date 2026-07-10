@@ -2,6 +2,7 @@ import bpy
 
 from .data.surface import RSDFSurfaceProperty
 from .operators.add_surface import RSDF_OT_add_surface
+from .operators.export_ros2_package import RSDF_OT_export_ros2_package
 from .operators.export_rsdf import RSDF_OT_export_rsdf
 from .operators.load_rsdf import RSDF_OT_load_rsdf
 from .operators.remove_surface import RSDF_OT_remove_surface
@@ -21,6 +22,7 @@ classes = (
     RSDF_PT_panel,
     RSDF_OT_add_surface,
     RSDF_OT_export_rsdf,
+    RSDF_OT_export_ros2_package,
     RSDF_OT_load_rsdf,
     RSDF_OT_remove_surface,
 )

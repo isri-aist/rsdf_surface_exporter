@@ -17,6 +17,7 @@ class RSDF_PT_panel(bpy.types.Panel):
         row.operator("rsdf.add_surface", text="Add Cylinder").surface_type = "CYLINDER"
         layout.operator("rsdf.load_rsdf", icon="FILE_FOLDER")
         layout.operator("rsdf.export", icon="EXPORT")
+        layout.operator("rsdf.export_ros2_package", icon="EXPORT")
 
         layout.separator()
 
