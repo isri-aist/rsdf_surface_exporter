@@ -15,7 +15,7 @@ def export_rsdf(filepath, surfaces):
         if s.surface_type == "PLANE":
             surf = ET.SubElement(robot, "planar_surface")
             surf.set("name", s.name)
-            surf.set("link", "base_link")
+            surf.set("link", s.link)
 
             origin = ET.SubElement(surf, "origin")
             origin.set("xyz", f"{s.origin_x} {s.origin_y} {s.origin_z}")
@@ -38,7 +38,7 @@ def export_rsdf(filepath, surfaces):
         elif s.surface_type == "CYLINDER":
             surf = ET.SubElement(robot, "cylindrical_surface")
             surf.set("name", s.name)
-            surf.set("link", "base_link")
+            surf.set("link", s.link)
             surf.set("radius", str(s.radius))
             surf.set("width", str(s.width))
 

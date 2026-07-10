@@ -32,6 +32,7 @@ class RSDF_OT_load_rsdf(bpy.types.Operator):
             surf = context.scene.rsdf_surfaces.add()
             surf.surface_type = "PLANE"
             surf.name = surf_elem.get("name", "Surface")
+            surf.link = surf_elem.get("link", "base_link")
 
             origin = surf_elem.find("origin")
             if origin is not None:

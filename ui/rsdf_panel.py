@@ -39,3 +39,4 @@ class RSDF_PT_panel(bpy.types.Panel):
             surf = scene.rsdf_surfaces[scene.rsdf_surface_index]
             layout.prop(surf, "name")
             layout.prop(surf, "material")
+            layout.prop(surf, "link")

@@ -12,6 +12,8 @@ class RSDFSurfaceProperty(bpy.types.PropertyGroup):
 
     material: bpy.props.StringProperty(default="plastic")
 
+    link: bpy.props.StringProperty(name="Link", default="base_link")
+
     origin_x: bpy.props.FloatProperty()
     origin_y: bpy.props.FloatProperty()
     origin_z: bpy.props.FloatProperty()
