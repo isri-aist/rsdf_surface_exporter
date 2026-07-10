@@ -5,6 +5,8 @@
 
 A Blender addon to create, visualize, and export **RSDF (Robot Surface Description Format)** surfaces from 3D models. Supports **planar and cylindrical surfaces** with full visualization in Blender.
 
+![RSDF Surface Tool demo](doc/rsdf_exporter_demo.gif)
+
 > Warning ! Cylinder export has not been fully tested yet
 
 ---
