@@ -32,6 +32,7 @@ jobs:
             data/ \
             geometry/ \
             operators/ \
+            ros2_io/ \
             rsdf_io/ \
             ui/ \
             utils/
